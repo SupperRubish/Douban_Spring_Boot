@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.douban_game.dao.UserMapper">
+
+    <resultMap id="User" type="com.example.douban_game.entity.User">
+        <id column="user_id" jdbcType="INTEGER" property="user_id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="user_name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phone_number"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nick_name"/>
+        <result column="insurance" jdbcType="VARCHAR" property="insurance"/>
+        <result column="user_portrait" jdbcType="INTEGER" property="user_portrait"/>
+    </resultMap>
+
+
+<!--    <resultMap id="ColonyMap" type="com.example.jchadoop.entity.Colony">-->
+<!--        <id column="id" jdbcType="INTEGER" property="id"/>-->
+<!--        <result column="colony_name"  property="colony_name"/>-->
+<!--        <result column="master_ip"  property="master_ip"/>-->
+<!--        <result column="slaves_num"  property="slaves_num"/>-->
+<!--        <result column="create_date"  property="create_date"/>-->
+
+<!--    </resultMap>-->
+
+    <insert id="InsertUser" parameterType="com.example.douban_game.entity.User">
+        insert into user (user_name, password, phone_number,nick_name,insurance)
+        values (#{user_name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{phone_number,jdbcType=VARCHAR},#{nick_name,jdbcType=VARCHAR},#{insurance,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectUserAll" resultMap="User">
+        select * from user
+    </select>
+
+
+    <select id="selectUserById" parameterType="java.lang.Integer" resultMap="User">
+        select * from user where user_id=#{user_id}
+    </select>
+
+    <update id="updatePassword" parameterType="com.example.douban_game.entity.User">
+        update user set password=#{password}
+        where user_id=#{user_id}
+    </update>
+
+
+    <select id="selectUserByTele" parameterType="java.lang.String" resultMap="User">
+        select * from user where phone_number=#{phone_number}
+    </select>
+
+
+
+
+
+<!--    <select id="getAllPhone" resultMap="UserBaseMap">-->
+<!--        select phone_number from user-->
+<!--    </select>-->
+
+<!--    <select id="getAllColony" parameterType="java.lang.String" resultMap="ColonyMap">-->
+<!--        select * from colony where id=any(select colony_id from host where id=(select id from user where phone_number=#{phone_number}) and type = 1)-->
+<!--    </select>-->
+
+
+
+
+
+
+
+</mapper>

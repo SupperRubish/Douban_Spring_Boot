@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.douban_game.dao.CalculateresultMapper">
+
+    <resultMap id="CalculateresultMap" type="com.example.douban_game.entity.Calculateresult">
+                <id column="calc_id" jdbcType="INTEGER" property="calc_id"/>
+        <result column="operator_id" jdbcType="INTEGER" property="operator_id"/>
+        <result column="calc_date" jdbcType="TIMESTAMP" property="calc_date"/>
+        <result column="calc_data_num" jdbcType="INTEGER" property="calc_data_num"/>
+
+    </resultMap>
+
+
+    <select id="selectCalculateresult" resultMap="CalculateresultMap">
+        select * from calculateresult where operator_id=#{operator_id}
+    </select>
+
+    <insert id="addnewCalculate" parameterType="com.example.douban_game.entity.Calculateresult">
+
+        insert into calculateresult (operator_id,calc_date, calc_data_num)
+        values (#{operator_id,jdbcType=INTEGER},#{calc_date,jdbcType=TIMESTAMP},#{calc_data_num,jdbcType=INTEGER})
+
+    </insert>
+
+
+
+
+</mapper>

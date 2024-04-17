@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.douban_game.dao.GenerateMapper">
+
+    <resultMap id="GenerateBaseMap1" type="com.example.douban_game.entity.GenerateData">
+        <id column="fake_id" jdbcType="INTEGER" property="fake_id"/>
+        <result column="operator_id" jdbcType="INTEGER" property="operator_id"/>
+        <result column="generate_number" jdbcType="INTEGER" property="generate_number"/>
+        <result column="generate_date" jdbcType="TIMESTAMP" property="generate_date"/>
+        <result column="action" jdbcType="INTEGER" property="action"/>
+        <result column="roleplay" jdbcType="INTEGER" property="roleplay"/>
+        <result column="adventure" jdbcType="INTEGER" property="adventure"/>
+        <result column="alpinia" jdbcType="INTEGER" property="alpinia"/>
+    </resultMap>
+
+    <!--    property对应实体类属性，column对应数据库属性-->
+    <resultMap id="GenerateBaseMap2" type="com.example.douban_game.entity.GenerateData">
+        <id column="fake_id" jdbcType="INTEGER" property="fake_id"/>
+        <result column="operator_id" jdbcType="INTEGER" property="operator_id"/>
+        <result column="generate_number" jdbcType="INTEGER" property="generate_number"/>
+        <result column="generate_date" jdbcType="TIMESTAMP" property="generate_date"/>
+        <result column="action" jdbcType="INTEGER" property="action"/>
+        <result column="roleplay" jdbcType="INTEGER" property="roleplay"/>
+        <result column="adventure" jdbcType="INTEGER" property="adventure"/>
+        <result column="alpinia" jdbcType="INTEGER" property="alpinia"/>
+        <association property="area" javaType="com.example.douban_game.entity.Area">
+            <id property="area_id" column="area_id"/>
+            <result column="north_us" jdbcType="INTEGER" property="north_us"/>
+            <result column="south_us" jdbcType="INTEGER" property="south_us"/>
+            <result column="asia" jdbcType="INTEGER" property="asia"/>
+            <result column="europe" jdbcType="INTEGER" property="europe"/>
+        </association>
+        <association property="language" javaType="com.example.douban_game.entity.Language">
+            <id property="language_id" column="language_id"/>
+            <result column="chinese" jdbcType="INTEGER" property="chinese"/>
+            <result column="japanese" jdbcType="INTEGER" property="japanese"/>
+            <result column="english" jdbcType="INTEGER" property="english"/>
+            <result column="other_language" jdbcType="INTEGER" property="other_language"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="AreaBaseMap" type="com.example.douban_game.entity.Area">
+        <id column="area_id" jdbcType="INTEGER" property="area_id"/>
+        <result column="north_us" jdbcType="INTEGER" property="north_us"/>
+        <result column="south_us" jdbcType="INTEGER" property="south_us"/>
+        <result column="asia" jdbcType="INTEGER" property="asia"/>
+        <result column="europe" jdbcType="INTEGER" property="europe"/>
+    </resultMap>
+
+    <resultMap id="LanguageBaseMap" type="com.example.douban_game.entity.Language">
+        <id column="language_id" jdbcType="INTEGER" property="language_id"/>
+        <result column="chinese" jdbcType="INTEGER" property="chinese"/>
+        <result column="japanese" jdbcType="INTEGER" property="japanese"/>
+        <result column="english" jdbcType="INTEGER" property="english"/>
+        <result column="other_language" jdbcType="INTEGER" property="other_language"/>
+    </resultMap>
+
+<!--    <insert id="GenerateData" parameterType="com.example.douban_game.entity.GenerateData">-->
+<!--        insert into fakedata (operator_id, generate_number, generate_date)-->
+<!--        values (#{operator_id,jdbcType=INTEGER}, #{generate_number,jdbcType=INTEGER}, #{generate_date,jdbcType=INTEGER})-->
+<!--    </insert>-->
+
+    <insert id="GenerateData" parameterType="com.example.douban_game.entity.GenerateData">
+        insert into fakedata (operator_id, generate_number, generate_date,action,roleplay,adventure,alpinia)
+        values (#{operator_id,jdbcType=INTEGER}, #{generate_number,jdbcType=INTEGER}, #{generate_date,jdbcType=INTEGER},
+        #{action,jdbcType=INTEGER},#{roleplay,jdbcType=INTEGER},#{adventure,jdbcType=INTEGER},#{alpinia,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="GenerateAreaData" parameterType="com.example.douban_game.entity.Area">
+        insert into area (area_id,north_us, south_us, asia, europe)
+        values (#{area_id,jdbcType=INTEGER},#{north_us,jdbcType=INTEGER}, #{south_us,jdbcType=INTEGER}, #{asia,jdbcType=INTEGER},
+        #{europe,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="GenerateLanguageData" parameterType="com.example.douban_game.entity.Language">
+        insert into language (language_id,chinese, japanese, english, other_language)
+        values (#{language_id,jdbcType=INTEGER},#{chinese,jdbcType=INTEGER}, #{japanese,jdbcType=INTEGER}, #{english,jdbcType=INTEGER},
+        #{other_language,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectHistoryByOperatorIp" parameterType="java.lang.Integer" resultMap="GenerateBaseMap1">
+        select * from fakedata
+        where operator_id = #{operator_id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getGenerateHistory" parameterType="java.lang.Integer" resultMap="GenerateBaseMap2">
+        select fd.*, ad.north_us, ad.south_us, ad.asia, ad.europe, ld.chinese, ld.japanese, ld.english, ld.other_language
+        from fakedata as fd, area as ad,language as ld
+        where fd.fake_id = ad.area_id and fd.fake_id = ld.language_id and fd.operator_id=#{operator_id}
+    </select>
+
+    <select id="countHistory" resultType="java.lang.Integer">
+        select count(*) from fakedata
+    </select>
+
+
+    <select id="selectAllFakeId" resultType="java.lang.Integer">
+        select fake_id from fakedata
+    </select>
+
+
+    <select id="selectHistoryByID" parameterType="java.lang.Integer" resultMap="GenerateBaseMap2">
+        select fd.*, ad.north_us, ad.south_us, ad.asia, ad.europe, ld.chinese, ld.japanese, ld.english, ld.other_language
+        from fakedata as fd, area as ad,language as ld
+        where fd.fake_id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getTotal" resultType="java.lang.Integer">
+        select generate_number
+        from fakedata
+        where operator_id = #{op_id} and fake_id = #{f_id}
+    </select>
+
+
+</mapper>

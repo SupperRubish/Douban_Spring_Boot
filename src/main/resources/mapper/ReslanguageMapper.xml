@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.douban_game.dao.ReslanguageMapper">
+
+    <resultMap id="ReslanguageMap" type="com.example.douban_game.entity.Reslanguage">
+        <id column="resl_id" jdbcType="INTEGER" property="resl_id"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="chinese" jdbcType="INTEGER" property="chinese"/>
+        <result column="japanese" jdbcType="INTEGER" property="japanese"/>
+        <result column="english" jdbcType="INTEGER" property="english"/>
+        <result column="other_language" jdbcType="INTEGER" property="other_language"/>
+
+    </resultMap>
+
+
+    <select id="selectReslanguage" parameterType="java.lang.Integer" resultMap="ReslanguageMap">
+        select * from reslanguage where resl_id=#{resl_id}
+    </select>
+
+
+
+
+
+
+</mapper>

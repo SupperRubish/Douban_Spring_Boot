@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.douban_game.dao.GameDataMapper">
+
+    <resultMap id="GameDataMap" type="com.example.douban_game.entity.GameData">
+<!--        <id column="game" jdbcType="INTEGER" property="fake_id"/>-->
+        <result column="game_name" jdbcType="VARCHAR" property="game_name"/>
+        <result column="game_kind" jdbcType="VARCHAR" property="game_kind"/>
+        <result column="game_comment_number" jdbcType="INTEGER" property="game_comment_number"/>
+        <result column="game_platform" jdbcType="VARCHAR" property="game_platform"/>
+        <result column="game_rating" jdbcType="DOUBLE" property="game_rating"/>
+        <result column="game_image" jdbcType="VARCHAR" property="game_image"/>
+        <result column="game_content" jdbcType="VARCHAR" property="game_content"/>
+    </resultMap>
+
+
+    <select id="selectGameData" resultMap="GameDataMap">
+        select * from gamedata
+    </select>
+
+
+
+
+</mapper>

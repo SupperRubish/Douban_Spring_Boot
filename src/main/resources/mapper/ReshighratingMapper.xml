@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.douban_game.dao.ReshighratingMapper">
+
+    <resultMap id="ReshighratingMap" type="com.example.douban_game.entity.Reshighrating">
+                <id column="resr_id" jdbcType="INTEGER" property="resr_id"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="four_5" jdbcType="INTEGER" property="four_5"/>
+        <result column="four_6" jdbcType="INTEGER" property="four_6"/>
+        <result column="four_7" jdbcType="INTEGER" property="four_7"/>
+        <result column="four_8" jdbcType="INTEGER" property="four_8"/>
+        <result column="four_9" jdbcType="INTEGER" property="four_9"/>
+        <result column="five_0" jdbcType="INTEGER" property="five_0"/>
+    </resultMap>
+
+
+    <select id="selectReshighrating" parameterType="java.lang.Integer" resultMap="ReshighratingMap">
+        select * from reshighrating where resr_id=#{resr_id}
+    </select>
+
+
+
+
+</mapper>

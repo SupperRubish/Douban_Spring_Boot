@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.douban_game.dao.PortraitMapper">
+
+    <resultMap id="Portrait" type="com.example.douban_game.entity.Portrait">
+        <id column="portrait_id" jdbcType="INTEGER" property="portrait_id"/>
+        <result column="portrait_name" jdbcType="VARCHAR" property="portrait_name"/>
+        <result column="portrait_link" jdbcType="VARCHAR" property="portrait_link"/>
+
+    </resultMap>
+
+
+    <!--    <resultMap id="ColonyMap" type="com.example.jchadoop.entity.Colony">-->
+    <!--        <id column="id" jdbcType="INTEGER" property="id"/>-->
+    <!--        <result column="colony_name"  property="colony_name"/>-->
+    <!--        <result column="master_ip"  property="master_ip"/>-->
+    <!--        <result column="slaves_num"  property="slaves_num"/>-->
+    <!--        <result column="create_date"  property="create_date"/>-->
+
+    <!--    </resultMap>-->
+
+
+
+    <select id="selectImg" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select portrait_link from portrait where portrait_id = #{portrait_id}
+    </select>
+
+
+    <select id="selectAll"  resultMap="Portrait">
+        select * from portrait
+    </select>
+
+
+
+
+
+
+
+
+    <!--    <select id="getAllPhone" resultMap="UserBaseMap">-->
+    <!--        select phone_number from user-->
+    <!--    </select>-->
+
+    <!--    <select id="getAllColony" parameterType="java.lang.String" resultMap="ColonyMap">-->
+    <!--        select * from colony where id=any(select colony_id from host where id=(select id from user where phone_number=#{phone_number}) and type = 1)-->
+    <!--    </select>-->
+
+
+
+
+
+
+
+</mapper>

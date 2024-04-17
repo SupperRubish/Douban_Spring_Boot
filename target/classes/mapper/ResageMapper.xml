@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.douban_game.dao.ResageMapper">
+
+    <resultMap id="ResageMap" type="com.example.douban_game.entity.Resage">
+        <id column="ra_id" jdbcType="INTEGER" property="ra_id"/>
+        <result column="year_1998" jdbcType="INTEGER" property="year_1998"/>
+        <result column="year_2001" jdbcType="INTEGER" property="year_2001"/>
+        <result column="year_2004" jdbcType="INTEGER" property="year_2004"/>
+        <result column="year_2007" jdbcType="INTEGER" property="year_2007"/>
+        <result column="year_2010" jdbcType="INTEGER" property="year_2010"/>
+        <result column="year_2013" jdbcType="INTEGER" property="year_2013"/>
+        <result column="year_2016" jdbcType="INTEGER" property="year_2016"/>
+        <result column="year_2019" jdbcType="INTEGER" property="year_2019"/>
+        <result column="year_2022" jdbcType="INTEGER" property="year_2022"/>
+
+    </resultMap>
+
+
+    <!--    <resultMap id="ColonyMap" type="com.example.jchadoop.entity.Colony">-->
+    <!--        <id column="id" jdbcType="INTEGER" property="id"/>-->
+    <!--        <result column="colony_name"  property="colony_name"/>-->
+    <!--        <result column="master_ip"  property="master_ip"/>-->
+    <!--        <result column="slaves_num"  property="slaves_num"/>-->
+    <!--        <result column="create_date"  property="create_date"/>-->
+
+    <!--    </resultMap>-->
+
+
+
+    <select id="selectResage" parameterType="java.lang.Integer" resultMap="ResageMap">
+        select * from resage where ra_id = #{ra_id}
+    </select>
+
+
+
+
+</mapper>
